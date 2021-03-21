@@ -1,0 +1,7 @@
+{
+  "token": "Bot TOKEN_HERE",
+  "public_key": "PUBLIC_KEY",
+  "client_id": CLIENT_ID,
+  "guild_id": GUILD_ID_FOR_TESTING,
+  "port": 8080
+}
