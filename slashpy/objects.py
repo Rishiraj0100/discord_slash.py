@@ -32,6 +32,4 @@ class User:
             else:
                 size_str = ""
             return f"https://cdn.discordapp.com/avatars/{self.id}/{self.avatar}.{img_format}{size_str}"
-        else:
-            # TODO: Add default Discord avatar
-            return None
+        return f"https://cdn.discordapp.com/embed/avatars/{int(self.discriminator) % 5}.png"
