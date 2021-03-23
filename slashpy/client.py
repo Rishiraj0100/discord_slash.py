@@ -3,12 +3,13 @@ import sys
 import importlib
 
 from .endpoints import Endpoints
+from threading import Thread
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
-from quart import Quart, request, abort
+from flask import Flask, request, abort, jsonify
 
 
-app = Quart(__name__)
+app = Flask(__name__)
 
 
 class Server:
@@ -17,12 +18,12 @@ class Server:
         self.port = port
 
     @app.route("/", methods=["POST"])
-    async def interactions(self):
-        data = await request.json
+    def interactions(self):
+        data = request.form
         await self.bot.verify(request)
 
         if data["type"] == 1:
-            return {"type": 1}
+            return jsonift{"type": 1}
 
         command = self.bot.get_command(data["data"]["name"])
         if command:
@@ -30,8 +31,17 @@ class Server:
         else:
             return abort(400)
 
-    def start(self):
+    def run_server(self):
         app.run(port=self.port)
+    
+    def start(self):
+        try:
+            Thread(target=run_server).start()
+        except:
+            try:
+                self.run_server()
+            except Exception as e:
+                print(e)
 
 
 class Client:
