@@ -25,5 +25,13 @@ setup(
     packages=['slashpy'],
     description='Discord Slash command builder made in Python',
     long_description=readme,
+    long_description_content_type="text/markdown",
+    project_urls = {
+        "Code": "https://github.com/AlexFlipnote/discord_slash.py/",
+        "Issue tracker": "https://github.com/AlexFlipnote/discord_slash.py/issues"
+    },
+    classifiers = [
+        "License :: OSI Approved :: MIT License"
+    ],
     include_package_data=True
 )
