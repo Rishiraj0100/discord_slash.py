@@ -1,6 +1,7 @@
 import os
 import sys
 import importlib
+import asyncio
 
 from .endpoints import Endpoints
 from nacl.signing import VerifyKey
@@ -9,6 +10,7 @@ from quart import Quart, request, abort
 
 
 app = Quart(__name__)
+loop = asyncio.get_event_loop()
 
 
 class Server:
@@ -31,7 +33,7 @@ class Server:
             return abort(400)
 
     def start(self):
-        app.run(port=self.port)
+        app.run(port=self.port, loop=loop)
 
 
 class Client:
