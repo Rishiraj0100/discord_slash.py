@@ -2,7 +2,7 @@ import os
 import sys
 import importlib
 
-from slashpy import Endpoints
+from .endpoints import Endpoints
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
 from quart import Quart, request, abort
