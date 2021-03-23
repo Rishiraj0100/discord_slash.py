@@ -1,6 +1,12 @@
 # discord_slash.py
 Attempting to create a framework for Discord Slash commands... yes
 
+# Installation
+`pip install slashpy`
+
+# Documentation
+Coming soon™
+
 # Disclaimer
 This is heavily made to target 1 server only, whenever I get a good, modular slash command handler, I will start converting this in to a framework. Feel free to make pull requests if you have ideas on how this can be improved. ❤
 

@@ -15,12 +15,20 @@ class Command:
         if not isinstance(self.name, str):
             raise TypeError("Command name must be a string")
 
-    def reply(self, bot):
+    def prepare(self, bot):
+        pass
+
+    async def reply(self, bot):
         pass
 
     @property
+    def raw(self):
+        """ Display raw JSON """
+        return self.command
+
     def build(self):
         """ Build the JSON command """
+        self.prepare(self.bot)
         self.command["name"] = self.name
         self.command["description"] = self.description or "No description available"
         self.command["options"] = self.options
@@ -28,9 +36,7 @@ class Command:
 
 
 class Option:
-    def __init__(self, name: str, description: str = None):
-        self.name = name
-        self.description = description
+    def __init__(self):
         self.options = []
 
     def build(self):
@@ -44,7 +50,7 @@ class Option:
 
         make_option = {
             "name": name, "description": description,
-            "required": required, "choices": choices, "type": 3
+            "type": 3, "required": required, "choices": choices
         }
 
         self.options.append(make_option)

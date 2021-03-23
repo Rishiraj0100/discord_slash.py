@@ -2,9 +2,10 @@ import requests
 
 
 class Endpoints:
-    def __init__(self, bot_token: str, public_key: str):
+    def __init__(self, bot_token: str, public_key: str, debug: bool = False):
         self.url = "https://discord.com/api/v8"
 
+        self.debug = debug
         self.bot_token = bot_token
         self.public_key = public_key
         self.application_id = self.get_bot_id()
@@ -19,7 +20,12 @@ class Endpoints:
             "Content-Type": "application/json"
         }
 
-        return getattr(requests, method.lower())(url, headers=headers, *args, **kwargs)
+        r = getattr(requests, method.lower())(url, headers=headers, *args, **kwargs)
+
+        if self.debug:
+            print(f"{r}\n{r.content}")
+
+        return r
 
     def get_bot_id(self):
         """ Get the Bot/Application ID """
